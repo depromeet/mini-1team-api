@@ -13,7 +13,7 @@ public class TestController {
     @Autowired
     private TestService service;
 
-    @GetMapping
+    @GetMapping("/")
     public LocalDateTime now() {
         return service.now();
     }
