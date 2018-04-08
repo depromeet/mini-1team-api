@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.depromeet.team.mapper.CommentMapper">
+	<insert id="create">
+		insert into COMMENT (movie_seq, nickname, content, create_datetime, modify_date) values (#{movie_seq}, #{nickname}, #{content}, now(), now())
+	</insert>
+	
+	<select id="read" resultType="CommentVO">
+		select (nickname, content, createDateTime, modify_date) from COMMENT where seq = #{seq}
+	</select>
+	
+	<update id="update">
+		update COMMENT set content = #{content}, modify_date = now() where seq = #{seq}
+	</update>
+	
+	<delete id="delete">
+		delete from COMMENT where seq = #{seq}
+	</delete>
+	
+	<select id="listAll" resultType="CommentVO">
+		select * from COMMENT where movie_seq = #{movie_seq}
+		order by seq desc
+	</select>
+</mapper>
