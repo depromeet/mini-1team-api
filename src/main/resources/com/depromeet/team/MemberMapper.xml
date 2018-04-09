@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.depromeet.team.mapper.MemberMapper">
+
+	<insert id="insert">
+		insert into MEMBER (uid, name, gender, date_of_birth, nickname, keywords, join_date) values (#{uid}, #{name}, #{gender}, #{dateOfBirth}, #{nickname}, #{keyword}, now())
+	</insert>
+	
+	<select id="selectOne" resultType="Member">
+		select * from MEMBER where uid = #{uid}
+	</select>
+	
+	<update id="update">
+		update MEMBER set keywords = #{keyword} where uid = #{uid}
+	</update>
+	
+	<delete id="delete">
+		delete from MEMBER where uid = #{uid}
+	</delete>
+</mapper>
