@@ -1,16 +1,19 @@
 package com.depromeet.team.mapper;
 
-import java.util.List;
-
+import com.depromeet.team.domain.Comment;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.depromeet.team.domain.CommentVO;
+import java.util.List;
 
 @Mapper
 public interface CommentMapper {
-	void create(CommentVO vo);
-	CommentVO read(long seq);
-	void update(CommentVO vo);
-	void delete(long seq);
-	List<CommentVO> listAll(long movieSeq);	
+    void insert(Comment comment);
+
+    Comment selectOne(Long seq);
+
+    void update(Comment vo);
+
+    void delete(Long seq);
+
+    List<Comment> selectAll(Long movieSeq);
 }

@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.depromeet.team.mapper.CommentMapper">
-	<insert id="create">
+	<insert id="insert">
 		insert into COMMENT (movie_seq, nickname, content, create_datetime, modify_date) values (#{movie_seq}, #{nickname}, #{content}, now(), now())
 	</insert>
 	
-	<select id="read" resultType="CommentVO">
+	<select id="selectOne" resultType="Comment">
 		select (nickname, content, createDateTime, modify_date) from COMMENT where seq = #{seq}
 	</select>
 	
@@ -20,7 +20,7 @@
 		delete from COMMENT where seq = #{seq}
 	</delete>
 	
-	<select id="listAll" resultType="CommentVO">
+	<select id="selectAll" resultType="Comment">
 		select * from COMMENT where movie_seq = #{movie_seq}
 		order by seq desc
 	</select>

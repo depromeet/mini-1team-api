@@ -2,34 +2,35 @@ package com.depromeet.team.service;
 
 import java.util.List;
 
+import com.depromeet.team.domain.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.depromeet.team.domain.CommentVO;
 import com.depromeet.team.mapper.CommentMapper;
 
 @Service
 public class CommentService {
+
 	@Autowired
 	private CommentMapper mapper;
 
-	public void createComment(CommentVO vo) {
-		mapper.create(vo);
+	public void create(Comment vo) {
+		mapper.insert(vo);
 	}
 	
-	public CommentVO readComment(long seq) {
-		return mapper.read(seq);
+	public Comment findOne(long seq) {
+		return mapper.selectOne(seq);
 	}
 	
-	public void updateComment(CommentVO vo) {
+	public void update(Comment vo) {
 		mapper.update(vo);
 	}
 	
-	public void deleteComment(long seq) {
+	public void delete(long seq) {
 		mapper.delete(seq);
 	}
 	
-	public List<CommentVO> listAllComment(long movie_seq) {
-		return mapper.listAll(movie_seq);
+	public List<Comment> findAll(long movie_seq) {
+		return mapper.selectAll(movie_seq);
 	}
 }
