@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @Component
 public class SearchMovieRepository {
@@ -27,19 +30,20 @@ public class SearchMovieRepository {
 
     public Movie selectList(Search search) {
         try {
-            return restTemplate.exchange(uriComponentsBuilder(search).toUriString(),
-                                        HttpMethod.GET,
-                                        new HttpEntity<>(httpHeaders()),
-                                        Movie.class).getBody();
+            URI uri = uriComponents(search).toUri();
+            HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders());
+            ResponseEntity<Movie> response = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, Movie.class);
+            return response.getBody();
         } catch (RestClientResponseException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "ERROR");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "error");
         }
     }
 
-    private UriComponentsBuilder uriComponentsBuilder(Search search) {
+    private UriComponents uriComponents(Search search) {
         return UriComponentsBuilder
-                .fromHttpUrl("https://openapi.naver.com/v1/search/movie.json")
-                .queryParams(search.toParams());
+                .fromHttpUrl(properties.getUrl())
+                .queryParams(search.toParams())
+                .build();
     }
 
     private HttpHeaders httpHeaders() {
