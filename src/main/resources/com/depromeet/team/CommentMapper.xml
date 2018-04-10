@@ -5,11 +5,11 @@
 
 <mapper namespace="com.depromeet.team.mapper.CommentMapper">
 	<insert id="insert">
-		insert into COMMENT (movie_seq, nickname, content, create_datetime, modify_date) values (#{movie_seq}, #{nickname}, #{content}, now(), now())
+		insert into COMMENT (movie_seq, nickname, content, create_date, modify_date) values (#{movieSeq}, #{nickname}, #{content}, now(), now())
 	</insert>
 	
 	<select id="selectOne" resultType="Comment">
-		select (nickname, content, createDateTime, modify_date) from COMMENT where seq = #{seq}
+		select * from COMMENT where seq = #{seq}
 	</select>
 	
 	<update id="update">

@@ -17,7 +17,7 @@ public class MovieController {
     private SearchMovieService service;
 
     @GetMapping
-    public Movie findList(@RequestParam String query, @RequestParam String genre, @RequestParam(defaultValue = "1") Integer start) {
+    public Movie findList(@RequestParam String query, @RequestParam(defaultValue = "") String genre, @RequestParam(defaultValue = "1") Integer start) {
         Search search = new Search(query, genre, start);
         return service.findList(search);
     }

@@ -17,7 +17,6 @@ public class Movie {
     protected Movie() {}
 
     public Movie(Date lastBuildDate, Integer total, Integer start, Integer display, List<MovieItem> items) {
-//        this.lastBuildDate = ZonedDateTime.ofInstant(lastBuildDate.toInstant(), ZoneId.systemDefault());
         this.lastBuildDate = lastBuildDate;
         this.total = total;
         this.start = start;

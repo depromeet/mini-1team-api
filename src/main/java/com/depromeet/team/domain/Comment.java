@@ -1,87 +1,68 @@
 package com.depromeet.team.domain;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.LocalDate;
 
 public class Comment {
-	// 시퀀스
-	private long seq;
-	
-	private long movie_seq;
-	
-	// 닉네임
-	private String nickname;
 
-	// 내용
-	private String content;
+    @JsonIgnore
+    private Long seq;
+    @JsonProperty("movie_seq")
+    private Long movieSeq;
+    private String nickname;
+    private String content;
+    @JsonIgnore
+    private LocalDate createdDate;
+    @JsonIgnore
+    private LocalDate modifiedDate;
 
-	// 생성날짜
-	private LocalDateTime createDatetime;
+    public void setSeq(Long seq) {
+        this.seq = seq;
+    }
 
-	// 수정날짜
-	private LocalDateTime modifyDate;
+    public void setMovieSeq(Long movieSeq) {
+        this.movieSeq = movieSeq;
+    }
 
-	public long getSeq() {
-	    return seq;
-	}
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-	public void setSeq(long seq) {
-	    this.seq = seq;
-	}	
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public long getMovie_seq() {
-		return movie_seq;
-	}
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
 
-	public void setMovie_seq(long movie_seq) {
-		this.movie_seq = movie_seq;
-	}
+    public void setModifiedDate(LocalDate modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
 
-	public String getNickname() {
-	    return nickname;
-	}
+    public Long getSeq() {
+        return seq;
+    }
 
-	public void setNickname(String nickname) {
-	    this.nickname = nickname;
-	}
+    public Long getMovieSeq() {
+        return movieSeq;
+    }
 
-	public String getContent() {
-	    return content;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public void setContent(String content) {
-	    this.content = content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public LocalDateTime getCreateDatetime() {
-	    return createDatetime;
-	}
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
 
-	public void setCreateDatetime(LocalDateTime createDatetime) {
-	    this.createDatetime = createDatetime;
-	}
-
-	public LocalDateTime getModifyDate() {
-	    return modifyDate;
-	}
-
-	public void setModifyDate(LocalDateTime modifyDate) {
-	    this.modifyDate = modifyDate;
-	}
-
-	// Comment 모델 복사
-	public void CopyData(Comment param)
-	{
-	    this.seq = param.getSeq();
-	    this.nickname = param.getNickname();
-	    this.content = param.getContent();
-	    this.createDatetime = param.getCreateDatetime();
-	    this.modifyDate = param.getModifyDate();
-	}
-
-	@Override
-	public String toString() {
-		return "Comment [seq=" + seq + ", movie_seq=" + movie_seq + ", nickname=" + nickname + ", content=" + content
-				+ ", createDatetime=" + createDatetime + ", modifyDate=" + modifyDate + "]";
-	}
-	
+    public LocalDate getModifiedDate() {
+        return modifiedDate;
+    }
 }
