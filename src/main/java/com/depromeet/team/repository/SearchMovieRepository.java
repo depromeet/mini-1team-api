@@ -33,8 +33,6 @@ public class SearchMovieRepository {
     public Movie selectList(Search search) {
         try {
             URI uri = uriComponents(search).toUri();
-            System.out.println(uri);
-            System.out.println(uriComponentsBuilder(search).toUriString());
             HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders());
             ResponseEntity<Movie> response = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, Movie.class);
             return response.getBody();
