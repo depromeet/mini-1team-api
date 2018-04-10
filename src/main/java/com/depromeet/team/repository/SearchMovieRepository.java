@@ -13,6 +13,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class SearchMovieRepository {
@@ -31,6 +33,8 @@ public class SearchMovieRepository {
     public Movie selectList(Search search) {
         try {
             URI uri = uriComponents(search).toUri();
+            System.out.println(uri);
+            System.out.println(uriComponentsBuilder(search).toUriString());
             HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders());
             ResponseEntity<Movie> response = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, Movie.class);
             return response.getBody();
@@ -43,7 +47,14 @@ public class SearchMovieRepository {
         return UriComponentsBuilder
                 .fromHttpUrl(properties.getUrl())
                 .queryParams(search.toParams())
-                .build();
+                .build()
+                .encode(StandardCharsets.UTF_8);
+    }
+
+    private UriComponentsBuilder uriComponentsBuilder(Search search) {
+        return UriComponentsBuilder
+                .fromHttpUrl(properties.getUrl())
+                .queryParams(search.toParams());
     }
 
     private HttpHeaders httpHeaders() {
